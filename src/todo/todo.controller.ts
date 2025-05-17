@@ -7,9 +7,9 @@ export class TodoController {
   constructor(private readonly todoService: TodoService) {}
 
   @Post()
-  create(@Body() data: Pick<Todo, 'title'>) { // ✅ Only require title for now
-    return this.todoService.create(data);
-  }
+create(@Body() data: { title: string }) {
+  return this.todoService.create(data);
+}
 
   @Get()
   findAll() {

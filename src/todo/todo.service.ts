@@ -6,9 +6,14 @@ import { Todo } from '@prisma/client'; // 👈 Use this instead of Prisma.TodoCr
 export class TodoService {
   constructor(private prisma: PrismaService) {}
 
-  create(data: Pick<Todo, 'title'>) {
-    return this.prisma.todo.create({ data });
-  }
+  create(data: { title: string }) {
+  return this.prisma.todo.create({
+    data: {
+      title: data.title,
+      completed: false,
+    },
+  });
+}
 
   findAll() {
     return this.prisma.todo.findMany();
